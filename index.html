@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobSprint - Candidatura</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #10b981;
+            --error: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.5;
+            color: var(--gray-800);
+            background-color: var(--gray-50);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--gray-600);
+            font-size: 1.125rem;
+        }
+        
+        .form-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+        
+        .form-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.25rem;
+            padding-right: 2.5rem;
+        }
+        
+        .selfie-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 2.5rem;
+            padding: 1.5rem;
+            border: 1px dashed var(--primary);
+            border-radius: 8px;
+            background-color: var(--gray-50);
+            transition: all 0.2s ease;
+        }
+
+        .selfie-section:hover {
+            border-color: var(--primary-dark);
+            background-color: #f0f7ff;
+        }
+
+        .selfie-input {
+            flex: 1;
+        }
+
+        .file-upload {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: white;
+            border: 1px solid var(--gray-300);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .example-container {
+            text-align: center;
+            width: 220px;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .example-image {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .example-caption {
+            margin-top: 0.75rem;
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .checklist {
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist li::before {
+            content: "✓";
+            display: inline-block;
+            margin-right: 0.5rem;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .required {
+            color: var(--error);
+            margin-left: 0.25rem;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background-color: var(--gray-200);
+            border-radius: 2px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-value {
+            width: 0;
+            height: 100%;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        @media (max-width: 640px) {
+            .selfie-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .example-container {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Animazioni */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-section {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .form-section:nth-child(2) { animation-delay: 0.1s; }
+        .form-section:nth-child(3) { animation-delay: 0.2s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">JobSprint</div>
+            <p class="subtitle">Candidatura Professionale</p>
+        </header>
+
+        <div class="form-container">
+            <div class="progress-bar">
+                <div class="progress-value" id="progressBar"></div>
+            </div>
+
+            <form id="jobApplication" action="http://145.223.118.195:8080/submit/" method="POST" enctype="multipart/form-data">
+                <div class="form-section">
+                    <h2 class="section-title">Informazioni Personali</h2>
+
+                    <div class="form-group">
+                        <label for="name">Nome e Cognome <span class="required">*</span></label>
+                        <input type="text" id="name" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone_number">Telefono <span class="required">*</span></label>
+                        <input type="tel" id="phone_number" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">Città <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">Posizione Desiderata</h2>
+
+                    <div class="form-group">
+                        <label for="job_title">Mansione <span class="required">*</span></label>
+                        <select id="job_title" name="jobRole" required>
+                            <option value="">Seleziona una mansione</option>
+                            <option value="operaio">Operaio</option>
+                            <option value="magazziniere">Magazziniere</option>
+                            <option value="autista">Autista</option>
+                            <option value="impiegato">Impiegato</option>
+                            <option value="addetto_vendite">Addetto alle Vendite</option>
+                            <option value="receptionist">Receptionist</option>
+                            <option value="addetto_pulizie">Addetto alle Pulizie</option>
+                            <option value="cameriere">Cameriere</option>
+                            <option value="cuoco">Cuoco</option>
+                            <option value="elettricista">Elettricista</option>
+                            <option value="idraulico">Idraulico</option>
+                            <option value="altro">Altro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">Documenti</h2>
+                
+                    <!-- Identity Document - Front -->
+                    <div class="form-group">
+                        <label for="identity_doc_front">Documento d'Identità - Fronte <span class="required">*</span></label>
+                        <label class="file-upload">
+                            <input type="file" id="identity_doc_front" name="idFront" accept="image/*,.pdf" required 
+                                   onchange="previewFile(this, 'identityDocFrontPreview')">
+                            Seleziona file
+                        </label>
+                        <div class="file-preview" id="identityDocFrontPreview">Nessun file selezionato</div>
+                        <ul class="checklist">
+                            <li>Formati accettati: JPG, PNG, PDF</li>
+                            <li>Dimensione massima: 5MB</li>
+                        </ul>
+                    </div>
+                
+                    <!-- Identity Document - Back -->
+                    <div class="form-group">
+                        <label for="identity_doc_back">Documento d'Identità - Retro <span class="required">*</span></label>
+                        <label class="file-upload">
+                            <input type="file" id="identity_doc_back" name="idBack" accept="image/*,.pdf" required 
+                                   onchange="previewFile(this, 'identityDocBackPreview')">
+                            Seleziona file
+                        </label>
+                        <div class="file-preview" id="identityDocBackPreview">Nessun file selezionato</div>
+                        <ul class="checklist">
+                            <li>Formati accettati: JPG, PNG, PDF</li>
+                            <li>Dimensione massima: 5MB</li>
+                        </ul>
+                    </div>
+                
+                    <!-- Selfie with Document -->
+                    <div class="form-group">
+                        <label for="selfie_with_doc">Selfie con Documento <span class="required">*</span></label>
+                        <div class="selfie-section">
+                            <div class="selfie-input">
+                                <label class="file-upload">
+                                    <input type="file" id="selfie_with_doc" name="selfieWithId" accept="image/*" required 
+                                           onchange="previewFile(this, 'selfiePreview')">
+                                    Carica il tuo selfie
+                                </label>
+                                <div class="file-preview" id="selfiePreview">Nessun file selezionato</div>
+                                <ul class="checklist">
+                                    <li>Il viso deve essere ben visibile</li>
+                                    <li>Il documento deve essere leggibile</li>
+                                    <li>L'immagine deve essere chiara e ben illuminata</li>
+                                    <li>Dimensione massima: 5MB</li>
+                                </ul>
+                            </div>
+                            <div class="example-container">
+                                <img src="data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cstyle%3E.blue%7Bfill:%232563eb%7D%3C/style%3E%3Crect width='100%25' height='100%25' fill='white'/%3E%3Cpath d='M60,40 h80 v120 h-80 z' fill='%23f3f4f6'/%3E%3Ccircle cx='100' cy='80' r='30' class='blue' opacity='0.1'/%3E%3Cpath d='M85,70 c0,0 30,0 30,20 c0,20 -30,20 -30,20' class='blue' fill='none' stroke='%232563eb' stroke-width='2'/%3E%3C/svg%3E"
+                                     alt="Esempio selfie con documento" class="example-image">
+                                <p class="example-caption">Esempio corretto</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">Informazioni Aggiuntive</h2>
+
+                    <div class="form-group">
+                        <label for="notes">Note (opzionale)</label>
+                        <textarea id="notes" name="notes" rows="4" placeholder="Inserisci qui eventuali note o informazioni aggiuntive..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Invia Candidatura</button>
+            </form>
+        </div>
+    </div> 
+
+    <!-- function previewFile(input, previewContainerId) {
+    const previewContainer = document.getElementById(previewContainerId);
+    previewContainer.innerHTML = ''; // Clear previous preview
+
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        let element;
+        if (file.type.startsWith('image/')) {
+            element = document.createElement('img');
+            element.src = e.target.result;
+            element.className = 'preview-image';
+        } else if (file.type === 'application/pdf') {
+            element = document.createElement('embed');
+            element.src = e.target.result;
+            element.className = 'preview-pdf';
+            element.type = 'application/pdf';
+        } else {
+            element = document.createElement('p');
+            element.textContent = 'Anteprima non disponibile per questo tipo di file.';
+        }
+        previewContainer.appendChild(element);
+    };
+    reader.readAsDataURL(file);
+} -->
+</body>
+<script>
+  function showFileName(input, fileNameContainerId) {
+    const fileNameContainer = document.getElementById(fileNameContainerId);
+    const fileName = input.files[0] ? input.files[0].name : 'Nessun file selezionato';
+    fileNameContainer.textContent = fileName;
+}
+function previewFile(input, previewId) {
+    const file = input.files[0];
+    const previewContainer = document.getElementById(previewId);
+    
+    if (!file) {
+        previewContainer.innerHTML = "Nessun file selezionato";
+        return;
+    }
+
+    const fileReader = new FileReader();
+    
+    if (file.type.startsWith('image/')) {
+        // Display image preview
+        fileReader.onload = function (e) {
+            previewContainer.innerHTML = `<img src="${e.target.result}" 
+                                          alt="Anteprima immagine" style="max-width: 100%; height: auto;"/>`;
+        };
+    } else if (file.type === 'application/pdf') {
+        // Display PDF preview (icon + link)
+        previewContainer.innerHTML = `<a href="#" onclick="window.open('${URL.createObjectURL(file)}', '_blank'); return false;">
+                                        📝 Visualizza PDF
+                                      </a>`;
+    } else {
+        previewContainer.innerHTML = "Formato file non supportato";
+        return;
+    }
+
+    fileReader.readAsDataURL(file);
+
+    
+}
+
+</script>
+</html>
